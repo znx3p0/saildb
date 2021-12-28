@@ -1,6 +1,6 @@
 [package]
 name = "saildb"
-version = "0.1.0"
+version = "0.0.1"
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
@@ -8,6 +8,7 @@ edition = "2021"
 [dependencies]
 # sia = { path = "../sia/sia" }
 sia = "0.0.4"
-srpc = { path = "../srpc/srpc" }
+# srpc = { path = "../srpc/srpc" }
+srpc = "0.0.2"
 serde = { version = "1" }
 dashmap = "5"
