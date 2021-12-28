@@ -3,6 +3,11 @@ name = "saildb"
 version = "0.0.1"
 edition = "2021"
 
+repository = "https://github.com/znx3p0/saildb"
+keywords = [ "rpc", "async", "network", "microservices", "api" ]
+description = "SailDB is an in-memory database based on Sia and SRPC."
+license = "MIT"
+
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
