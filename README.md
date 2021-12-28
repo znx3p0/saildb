@@ -28,3 +28,5 @@ db.insert(&key, &val).await?;
 let val = db.get(&key).await?;
 assert!(val, Some("world!".to_string()))
 ```
+
+[A simple example of SailDB](https://github.com/znx3p0/saildb_test)
