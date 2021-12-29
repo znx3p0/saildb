@@ -1,8 +1,8 @@
 # SailDB
 
-SailDB is an in-memory database based on Sia and SRPC.
+SailDB is an in-memory database based on Canary and SRPC.
 
-SailDB is extremely performant since communications are based on top of Sia, and
+SailDB is extremely performant since communications are based on top of Canary, and
 the key-value store is backed by Dashmap.
 
 SailDB is generic over the keys and values, and can be constructed at runtime, and

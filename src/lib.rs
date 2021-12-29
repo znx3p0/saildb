@@ -4,15 +4,15 @@ use std::sync::Arc;
 use dashmap::DashMap;
 use serde::de::DeserializeOwned;
 use serde::Serialize;
-use sia::providers::ServiceAddr;
-use sia::routes::{Route, GLOBAL_ROUTE};
-use sia::{Addr, Channel, Result};
+use canary::providers::ServiceAddr;
+use canary::routes::{Route, GLOBAL_ROUTE};
+use canary::{Addr, Channel, Result};
 use srpc::IntoClient;
 
 const ID: &'static str = "sail";
 
 #[srpc::rpc]
-pub struct InnerSailDB<K: Hash + Eq, V> {
+struct InnerSailDB<K: Hash + Eq, V> {
     map: DashMap<K, V>,
 }
 
@@ -45,6 +45,10 @@ impl<K: Hash + Eq, V> InnerSailDB<K, V> {
         let value = self.map.insert(key, value);
         chan.send(value).await?;
         Ok(chan)
+    }
+    pub async fn insert_clean(&self, key: K, value: V) -> Result<Option<V>> {
+        let value = self.map.insert(key, value);
+        Ok(value)
     }
     #[manual]
     pub async fn remove(&self, mut chan: Channel) -> Result<Channel> {
@@ -120,3 +124,23 @@ where
     }
 }
 
+
+
+#[srpc::rpc] // other options include rpc(mutex), rpc(none)
+#[derive(Default)]
+pub struct DistributedList<T> {
+    list: Vec<T>
+}
+
+#[srpc::rpc]
+impl<T: Clone> DistributedList<T> {
+    async fn push(&mut self, value: T) {
+        self.list.push(value);
+    }
+    async fn get(&self, index: usize) -> Option<T> {
+        self.list.get(index).and_then(|val| Some(val.clone()))
+    }
+    async fn remove(&mut self, index: usize) -> T {
+        self.list.remove(index)
+    }
+}

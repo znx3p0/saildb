@@ -5,15 +5,15 @@ edition = "2021"
 
 repository = "https://github.com/znx3p0/saildb"
 keywords = [ "rpc", "async", "network", "microservices", "api" ]
-description = "SailDB is an in-memory database based on Sia and SRPC."
+description = "SailDB is an in-memory database based on Canary and SRPC."
 license = "MIT"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-# sia = { path = "../sia/sia" }
-sia = "0.0.4"
+# canary = { path = "../canary/canary" }
+canary = "0.0.6"
 # srpc = { path = "../srpc/srpc" }
-srpc = "0.0.2"
+srpc = "0.0.3"
 serde = { version = "1" }
 dashmap = "5"
